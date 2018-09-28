@@ -2,7 +2,7 @@
     <dbname value="Cool_Weather" />
     <version value= "1" />
     <list>
-        <mapping class = "com.mycoolweather.admin.mycoolweather.db.Provnce"/>
+        <mapping class = "com.mycoolweather.admin.mycoolweather.db.Province"/>
         <mapping class="com.mycoolweather.admin.mycoolweather.db.City"/>
         <mapping class="com.mycoolweather.admin.mycoolweather.db.County"/>
     </list>

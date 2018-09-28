@@ -8,7 +8,7 @@ import org.litepal.crud.DataSupport;
  * http://guolin.tech/api/weather?cityid=CN101190401&key=bc0418b57b2d4918819d3974ac1285d9
  */
 
-public class Provnce extends DataSupport {
+public class Province extends DataSupport {
     private int id; //每个实体类应有的字段
 
     private String provinceName; //省名
