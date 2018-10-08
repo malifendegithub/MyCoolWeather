@@ -2,6 +2,7 @@ package com.mycoolweather.admin.mycoolweather;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 import com.mycoolweather.admin.mycoolweather.db.City;
 import com.mycoolweather.admin.mycoolweather.db.County;
 import com.mycoolweather.admin.mycoolweather.db.Province;
+import com.mycoolweather.admin.mycoolweather.gson.Weather;
 import com.mycoolweather.admin.mycoolweather.util.HttpUtil;
 import com.mycoolweather.admin.mycoolweather.util.Utility;
 
@@ -90,7 +92,7 @@ public class ChooeAreaFrament extends Fragment {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,6 +103,21 @@ public class ChooeAreaFrament extends Fragment {
                 }else if(currentLevel == LEVEL_CITY){
                     selectedCity = cityList.get(position);
                     queryCounties();
+                }else if (currentLevel == LEVEL_COUNTY){
+                    String weatherId =countyList.get(position).getWeatherId();
+                    if(getActivity() instanceof  MainActivity){
+
+                    Intent intent = new Intent(getActivity(),WeatherActivity.class);
+                    intent.putExtra("weather_id",weatherId);
+                    startActivity(intent);
+                    getActivity().finish();
+                    }else
+                        if(getActivity() instanceof WeatherActivity){
+                            WeatherActivity activity = (WeatherActivity) getActivity();
+                            activity.drawerLayout.closeDrawers();
+                            activity.swipeRefresh.setRefreshing(true);
+                            activity.requestWeather(weatherId);
+                    }
                 }
             }
         });
